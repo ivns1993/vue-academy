@@ -8,13 +8,15 @@
       v-for="(contact, key) in contacts"
       :key="key"
     >
-      {{ contact.name }}
+      <slot :contactName="contact.first_name | toUpperCase(true) | toLowerCase">
+        {{ contact.first_name | toUpperCase(false) }} {{ contact.last_name  | toUpperCase }}
+      </slot>
     </router-link>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['contacts']
+  props: ['contacts'],
 }
 </script>

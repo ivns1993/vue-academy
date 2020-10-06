@@ -20,6 +20,18 @@ const router = new VueRouter({
   mode: 'history'
 })
 
+Vue.filter('toUpperCase', function(value, shouldFormatToUpperCase) {
+  if (!shouldFormatToUpperCase) {
+    return value;
+  }
+
+  return value.toUpperCase();
+})
+
+Vue.filter('toLowerCase', function(value) {
+  return value.toLowerCase();
+})
+
 new Vue({
   router,
   render: h => h(App)
