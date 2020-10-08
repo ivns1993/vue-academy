@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-4">
-    <form @submit.prevent="addUser">
+    <form @submit.prevent="onSubmit">
       <div class="form-group row">
         <label for="first_name" class="col-4 col-form-label">First Name</label>
         <div class="col-8">
@@ -54,12 +54,39 @@ export default {
       }
     }
   },
+
+  created() {
+    if (this.$route.params.id) {
+      this.getUser();
+    }
+  },
+
   methods: {
     addUser() {
       contacts.add(this.contact).then(() => {
         this.$router.push('/contacts');
       });
-    }
+    },
+
+    getUser() {
+      contacts.getOne(this.$route.params.id).then((response) => {
+        this.contact = response.data;
+      });
+    },
+
+    onSubmit() {
+      if (this.$route.params.id) {
+        this.editUser();
+      } else {
+        this.addUser();
+      }
+    },
+
+    editUser() {
+      contacts.edit(this.contact).then(() => {
+        this.$router.push('/contacts');
+      });
+    },
   }
 }
 </script>

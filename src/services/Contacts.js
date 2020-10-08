@@ -12,6 +12,17 @@ class Contacts {
     add(data) {
         return axios.post('/contacts', data);
     }
+
+    getOne(id) {
+        return axios.get(`/contacts/${id}`);
+    }
+
+    edit(contact) {
+        return axios.put(`/contacts/${contact.id}`, contact);
+    }
+    delete(id) {
+        return axios.delete(`/contacts/${id}`);
+    }
 }
 
 export const contacts = new Contacts();
